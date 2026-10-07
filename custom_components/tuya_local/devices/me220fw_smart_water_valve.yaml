@@ -44,7 +44,7 @@ entities:
           max: 100
 
   - entity: sensor
-    name: Daily water usage
+    name: Water usage
     class: water
     dps:
       - id: 5
