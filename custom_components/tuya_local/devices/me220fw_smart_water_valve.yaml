@@ -1,0 +1,78 @@
+name: ME220FW smart water valve
+
+products:
+  - id: 6w5zwkrivvjgqizb
+    manufacturer: Tuya
+    model: ME220FW
+    name: ME220FW Smart Valve
+
+entities:
+  - entity: valve
+    name: Valve
+    class: water
+    dps:
+      - id: 102
+        type: boolean
+        name: valve
+
+  - entity: number
+    name: Valve target position
+    icon: "mdi:valve"
+    dps:
+      - id: 2
+        type: integer
+        name: value
+        unit: "%"
+        range:
+          min: 0
+          max: 100
+        mapping:
+          - step: 10
+
+  - entity: sensor
+    name: Actual valve position
+    category: diagnostic
+    icon: "mdi:valve"
+    dps:
+      - id: 3
+        type: integer
+        name: sensor
+        unit: "%"
+        class: measurement
+        range:
+          min: 0
+          max: 100
+
+  - entity: sensor
+    name: Daily water usage
+    class: water
+    dps:
+      - id: 5
+        type: integer
+        name: sensor
+        unit: L
+        class: total_increasing
+        mapping:
+          - scale: 100
+
+  - entity: sensor
+    name: Total water usage
+    class: water
+    dps:
+      - id: 6
+        type: integer
+        name: sensor
+        unit: L
+        class: total_increasing
+        mapping:
+          - scale: 100
+
+  - entity: sensor
+    name: Water temperature
+    class: temperature
+    dps:
+      - id: 116
+        type: integer
+        name: sensor
+        unit: C
+        class: measurement
