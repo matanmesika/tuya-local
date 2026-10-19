@@ -23,7 +23,10 @@ def _device():
 def test_me220fw_product_identity():
     device = _device()
     assert device["name"] == "ME220FW smart water valve"
-    assert any(p["id"] == "6w5zwkrivvjgqizb" and p["model"] == "ME220FW" for p in device["products"])
+    assert any(
+        p["id"] == "6w5zwkrivvjgqizb" and p["model"] == "ME220FW"
+        for p in device["products"]
+    )
 
 
 def test_me220fw_local_datapoints_are_unique_and_have_expected_roles():
@@ -40,13 +43,17 @@ def test_me220fw_local_datapoints_are_unique_and_have_expected_roles():
     for entity in device["entities"]:
         assert len(entity["dps"]) == 1
         dp = entity["dps"][0]
-        assert dp["id"] not in actual, "Duplicate Tuya DP would create conflicting entities"
+        assert dp["id"] not in actual, (
+            "Duplicate Tuya DP would create conflicting entities"
+        )
         actual[dp["id"]] = (entity["entity"], dp["type"])
     assert actual == expected
 
 
 def test_me220fw_water_usage_scaling_and_position_limits():
-    by_id = {entity["dps"][0]["id"]: entity["dps"][0] for entity in _device()["entities"]}
+    by_id = {
+        entity["dps"][0]["id"]: entity["dps"][0] for entity in _device()["entities"]
+    }
     for dp_id in (5, 6):
         assert by_id[dp_id]["unit"] == "L"
         assert by_id[dp_id]["mapping"] == [{"scale": 100}]
@@ -57,4 +64,6 @@ def test_me220fw_water_usage_scaling_and_position_limits():
 
 def test_me220fw_does_not_invent_unavailable_local_battery_dp():
     local_ids = [d["id"] for entity in _device()["entities"] for d in entity["dps"]]
-    assert 7 not in local_ids, "Battery DP 7 is cloud metadata, absent from tested local protocol 3.5"
+    assert 7 not in local_ids, (
+        "Battery DP 7 is cloud metadata, absent from tested local protocol 3.5"
+    )
