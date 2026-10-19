@@ -9,7 +9,6 @@ from pathlib import Path
 
 import yaml
 
-
 CONFIG = (
     Path(__file__).resolve().parents[1]
     / "custom_components/tuya_local/devices/me220fw_smart_water_valve.yaml"
