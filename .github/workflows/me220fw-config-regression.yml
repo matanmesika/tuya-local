@@ -1,0 +1,27 @@
+name: ME220FW device mapping regression
+
+on:
+  push:
+    branches: [add-me220fw-smart-water-valve]
+  pull_request:
+    paths:
+      - 'custom_components/tuya_local/devices/me220fw_smart_water_valve.yaml'
+      - 'tests_me220fw/**'
+      - '.github/workflows/me220fw-config-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  config-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: Install standalone test dependencies
+        run: python -m pip install pytest pyyaml
+      - name: Validate ME220FW device configuration
+        run: python -m pytest -q tests_me220fw/test_device_config.py
