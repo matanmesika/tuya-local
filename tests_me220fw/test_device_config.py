@@ -2,6 +2,9 @@
 
 These checks deliberately make no claim about live battery reporting or hardware.
 """
+
+# Pytest assertions are intentional in this standalone regression module.
+# ruff: noqa: S101
 from pathlib import Path
 
 import yaml
