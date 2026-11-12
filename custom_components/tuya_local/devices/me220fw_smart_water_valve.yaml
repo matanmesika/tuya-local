@@ -4,7 +4,6 @@ products:
   - id: 6w5zwkrivvjgqizb
     manufacturer: Tuya
     model: ME220FW
-    name: ME220FW Smart Valve
 
 entities:
   - entity: valve
@@ -128,3 +127,201 @@ entities:
         name: sensor
         unit: C
         class: measurement
+
+  - entity: sensor
+    name: Air temperature
+    class: temperature
+    dps:
+      - id: 112
+        type: integer
+        name: sensor
+        unit: C
+        class: measurement
+        optional: true
+
+  - entity: binary_sensor
+    name: Daily usage alarm
+    class: problem
+    dps:
+      - id: 101
+        type: string
+        name: sensor
+        optional: true
+        mapping:
+          - dps_val: High
+            value: true
+          - value: false
+
+  - entity: binary_sensor
+    name: Single use alarm
+    class: problem
+    dps:
+      - id: 113
+        type: string
+        name: sensor
+        optional: true
+        mapping:
+          - dps_val: High
+            value: true
+          - value: false
+
+  - entity: number
+    name: Single use limit
+    category: config
+    icon: "mdi:water-alert"
+    dps:
+      - id: 104
+        type: integer
+        name: value
+        unit: L
+        optional: true
+        range:
+          min: 0
+          max: 99999
+
+  - entity: number
+    name: Daily limit
+    category: config
+    icon: "mdi:water-alert"
+    dps:
+      - id: 105
+        type: integer
+        name: value
+        unit: L
+        optional: true
+        range:
+          min: 0
+          max: 99999
+
+  - entity: switch
+    name: Close on single use limit
+    category: config
+    icon: "mdi:valve-closed"
+    dps:
+      - id: 106
+        type: boolean
+        name: switch
+        optional: true
+
+  - entity: switch
+    name: Close on daily limit
+    category: config
+    icon: "mdi:valve-closed"
+    dps:
+      - id: 107
+        type: boolean
+        name: switch
+        optional: true
+
+  - entity: select
+    name: Power failure state
+    category: config
+    icon: "mdi:power-plug-off"
+    dps:
+      - id: 103
+        type: string
+        name: option
+        optional: true
+        mapping:
+          - dps_val: "OFF"
+            value: Closed
+          - dps_val: "ON"
+            value: Open
+          - dps_val: Last_Status
+            value: Last state
+
+  - entity: sensor
+    name: Water temperature alarm
+    class: enum
+    category: diagnostic
+    icon: "mdi:thermometer-alert"
+    dps:
+      - id: 108
+        type: string
+        name: sensor
+        optional: true
+        mapping:
+          - dps_val: Normal
+            value: Normal
+          - dps_val: Temp_Low
+            value: Low
+          - dps_val: Temp_High
+            value: High
+
+  - entity: number
+    name: Water temperature high alarm
+    category: config
+    class: temperature
+    dps:
+      - id: 109
+        type: integer
+        name: value
+        unit: C
+        optional: true
+        range:
+          min: 0
+          max: 248
+
+  - entity: number
+    name: Water temperature low alarm
+    category: config
+    class: temperature
+    dps:
+      - id: 110
+        type: integer
+        name: value
+        unit: C
+        optional: true
+        range:
+          min: 0
+          max: 248
+
+  - entity: switch
+    name: Anti-rust
+    category: config
+    icon: "mdi:shield-refresh"
+    dps:
+      - id: 111
+        type: boolean
+        name: switch
+        optional: true
+
+  - entity: button
+    name: Self check
+    category: config
+    icon: "mdi:check-circle-outline"
+    dps:
+      - id: 118
+        type: boolean
+        name: button
+        optional: true
+
+  - entity: sensor
+    name: Self check status
+    class: enum
+    category: diagnostic
+    icon: "mdi:check-circle-outline"
+    dps:
+      - id: 119
+        type: string
+        name: sensor
+        optional: true
+        mapping:
+          - dps_val: nocheck
+            value: Not checked
+          - dps_val: check_ok
+            value: OK
+          - dps_val: check_err
+            value: Error
+          - dps_val: checking
+            value: Checking
+
+  - entity: sensor
+    name: Firmware version
+    category: diagnostic
+    icon: "mdi:chip"
+    dps:
+      - id: 115
+        type: string
+        name: sensor
+        optional: true
