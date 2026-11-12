@@ -1,1 +1,432 @@
-
+# Tuya Local configuration for product ID raaemnfgijnl9ovf (baby monitor camera).
+# DP list verified against the Tuya QueryThingsDataModel result and local DPS.
+# DP 212 carries a Base64 JSON alert (ipc_baby_cry / ipc_motion) including image
+# metadata, so its payload is marked sensitive.
+# No video stream is provided by tuya-local.
+# PTZ (119/116) and lullaby on/off (231) are command-only DPs, so their state
+# stays unknown until used.
+# SD formatting, device restart and siren controls are intentionally omitted.
+name: Baby Monitor
+products:
+- id: raaemnfgijnl9ovf
+  manufacturer: Tuya
+  model: Baby Monitor
+entities:
+- entity: event
+  name: Camera Alert Received
+  icon: mdi:bell-ring-outline
+  dps:
+  - id: 212
+    name: event
+    type: string
+    optional: true
+    mapping:
+    - value: camera_alert
+  - id: 212
+    name: payload
+    type: string
+    optional: true
+    sensitive: true
+- entity: sensor
+  name: Room Temperature Celsius
+  class: temperature
+  dps:
+  - id: 238
+    name: sensor
+    type: integer
+    optional: true
+    unit: C
+    mapping:
+    - scale: 10
+    precision: 1
+- entity: sensor
+  name: Room Humidity
+  class: humidity
+  dps:
+  - id: 143
+    name: sensor
+    type: integer
+    optional: true
+    unit: '%'
+- entity: sensor
+  name: Reported Temperature Fahrenheit
+  class: temperature
+  category: diagnostic
+  hidden: true
+  dps:
+  - id: 239
+    name: sensor
+    type: integer
+    optional: true
+    unit: F
+    mapping:
+    - scale: 10
+    precision: 1
+- entity: sensor
+  name: SD Card Status Code
+  category: diagnostic
+  dps:
+  - id: 110
+    name: sensor
+    type: integer
+    optional: true
+- entity: sensor
+  name: SD Card Storage Raw
+  category: diagnostic
+  hidden: true
+  dps:
+  - id: 109
+    name: sensor
+    type: string
+    optional: true
+- entity: sensor
+  name: SD Format State
+  category: diagnostic
+  hidden: true
+  dps:
+  - id: 117
+    name: sensor
+    type: integer
+    optional: true
+- entity: switch
+  name: Camera Status LED
+  category: config
+  dps:
+  - id: 101
+    name: switch
+    type: boolean
+    optional: true
+- entity: switch
+  name: Camera Privacy Mode
+  category: config
+  dps:
+  - id: 105
+    name: switch
+    type: boolean
+    optional: true
+- entity: switch
+  name: Motion Detection Enabled
+  category: config
+  dps:
+  - id: 134
+    name: switch
+    type: boolean
+    optional: true
+- entity: switch
+  name: Cry Detection Enabled
+  category: config
+  dps:
+  - id: 167
+    name: switch
+    type: boolean
+    optional: true
+- entity: switch
+  name: Recording Enabled
+  category: config
+  dps:
+  - id: 150
+    name: switch
+    type: boolean
+    optional: true
+- entity: switch
+  name: Lullaby Enabled
+  category: config
+  dps:
+  - id: 231
+    name: switch
+    type: boolean
+    optional: true
+- entity: switch
+  name: Temperature Alarm Settings
+  category: config
+  dps:
+  - id: 237
+    name: switch
+    type: boolean
+    optional: true
+- entity: switch
+  name: High Temperature Alert Enabled
+  category: config
+  dps:
+  - id: 241
+    name: switch
+    type: boolean
+    optional: true
+- entity: switch
+  name: Low Temperature Alert Enabled
+  category: config
+  dps:
+  - id: 242
+    name: switch
+    type: boolean
+    optional: true
+- entity: select
+  name: Camera PTZ Direction
+  icon: mdi:camera-control
+  category: config
+  dps:
+  - id: 119
+    name: option
+    type: string
+    optional: true
+    persist: false
+    mapping:
+    - dps_val: '0'
+      value: Up
+    - dps_val: '1'
+      value: Up-Right
+    - dps_val: '2'
+      value: Right
+    - dps_val: '3'
+      value: Down-Right
+    - dps_val: '4'
+      value: Down
+    - dps_val: '5'
+      value: Down-Left
+    - dps_val: '6'
+      value: Left
+    - dps_val: '7'
+      value: Up-Left
+- entity: button
+  name: Stop Camera Movement
+  icon: mdi:stop-circle-outline
+  category: config
+  dps:
+  - id: 116
+    name: button
+    type: boolean
+    optional: true
+    persist: false
+- entity: select
+  name: Motion Sensitivity Code
+  category: config
+  dps:
+  - id: 106
+    name: option
+    type: string
+    optional: true
+    mapping:
+    - dps_val: '0'
+      value: Low
+    - dps_val: '1'
+      value: Medium
+    - dps_val: '2'
+      value: High
+- entity: select
+  name: Sound Sensitivity Code
+  category: config
+  dps:
+  - id: 140
+    name: option
+    type: string
+    optional: true
+    mapping:
+    - dps_val: '0'
+      value: Low
+    - dps_val: '1'
+      value: High
+- entity: select
+  name: Infrared Night Vision Code
+  category: config
+  dps:
+  - id: 108
+    name: option
+    type: string
+    optional: true
+    mapping:
+    - dps_val: '0'
+      value: Auto
+    - dps_val: '1'
+      value: 'Off'
+    - dps_val: '2'
+      value: 'On'
+- entity: select
+  name: Recording Mode Code
+  category: config
+  dps:
+  - id: 151
+    name: option
+    type: string
+    optional: true
+    mapping:
+    - dps_val: '1'
+      value: Event
+    - dps_val: '2'
+      value: Continuous
+- entity: select
+  name: Image Flip
+  category: config
+  dps:
+  - id: 102
+    name: option
+    type: string
+    optional: true
+    mapping:
+    - dps_val: flip_none
+      value: Normal
+    - dps_val: flip_horizontal_mirror
+      value: Mirror
+    - dps_val: flip_vertical_mirror
+      value: Vertical flip
+    - dps_val: flip_rotate_180
+      value: Rotate 180
+- entity: select
+  name: Anti Flicker Code
+  category: config
+  hidden: true
+  dps:
+  - id: 188
+    name: option
+    type: string
+    optional: true
+    mapping:
+    - dps_val: '0'
+      value: 'Off'
+    - dps_val: '1'
+      value: 50Hz
+    - dps_val: '2'
+      value: 60Hz
+- entity: select
+  name: Lullaby Mode Code
+  category: config
+  dps:
+  - id: 232
+    name: option
+    type: string
+    optional: true
+    mapping:
+    - dps_val: '0'
+      value: '0'
+    - dps_val: '1'
+      value: '1'
+- entity: select
+  name: Lullaby Playback Code
+  category: config
+  dps:
+  - id: 234
+    name: option
+    type: string
+    optional: true
+    mapping:
+    - dps_val: '0'
+      value: '0'
+    - dps_val: '1'
+      value: '1'
+- entity: select
+  name: Lullaby Track Code
+  category: config
+  dps:
+  - id: 235
+    name: option
+    type: string
+    optional: true
+    mapping:
+    - dps_val: '0'
+      value: Track 1
+    - dps_val: '1'
+      value: Track 2
+    - dps_val: '2'
+      value: Track 3
+    - dps_val: '3'
+      value: Track 4
+    - dps_val: '4'
+      value: Track 5
+    - dps_val: '5'
+      value: Track 6
+    - dps_val: '6'
+      value: Track 7
+    - dps_val: '7'
+      value: Track 8
+- entity: select
+  name: Temperature Unit Code
+  category: config
+  dps:
+  - id: 240
+    name: option
+    type: string
+    optional: true
+    mapping:
+    - dps_val: '0'
+      value: Celsius
+    - dps_val: '1'
+      value: Fahrenheit
+- entity: number
+  name: Speaker Volume
+  category: config
+  dps:
+  - id: 160
+    name: value
+    type: integer
+    optional: true
+    range:
+      min: 1
+      max: 10
+- entity: number
+  name: Lullaby Volume
+  category: config
+  dps:
+  - id: 233
+    name: value
+    type: integer
+    optional: true
+    range:
+      min: 0
+      max: 10
+- entity: number
+  name: High Temperature Limit Celsius
+  category: config
+  dps:
+  - id: 243
+    name: value
+    type: integer
+    optional: true
+    unit: C
+    range:
+      min: 1
+      max: 500
+    mapping:
+    - scale: 10
+- entity: number
+  name: Low Temperature Limit Celsius
+  category: config
+  dps:
+  - id: 244
+    name: value
+    type: integer
+    optional: true
+    unit: C
+    range:
+      min: 0
+      max: 500
+    mapping:
+    - scale: 10
+- entity: number
+  name: High Temperature Limit Fahrenheit
+  category: config
+  hidden: true
+  dps:
+  - id: 245
+    name: value
+    type: integer
+    optional: true
+    unit: F
+    range:
+      min: 320
+      max: 1220
+    mapping:
+    - scale: 10
+- entity: number
+  name: Low Temperature Limit Fahrenheit
+  category: config
+  hidden: true
+  dps:
+  - id: 246
+    name: value
+    type: integer
+    optional: true
+    unit: F
+    range:
+      min: 320
+      max: 1220
+    mapping:
+    - scale: 10
