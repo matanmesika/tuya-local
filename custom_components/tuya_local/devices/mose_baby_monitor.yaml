@@ -28,7 +28,7 @@ entities:
     optional: true
     sensitive: true
 - entity: sensor
-  name: Room Temperature Celsius
+  name: Room Temperature
   class: temperature
   dps:
   - id: 238
@@ -63,7 +63,7 @@ entities:
     - scale: 10
     precision: 1
 - entity: sensor
-  name: SD Card Status Code
+  name: SD Card Status
   class: enum
   icon: mdi:sd
   category: diagnostic
@@ -84,7 +84,7 @@ entities:
     - dps_val: 5
       value: No SD card
 - entity: sensor
-  name: SD Card Storage Raw
+  name: SD Card Storage
   category: diagnostic
   hidden: true
   dps:
@@ -150,7 +150,7 @@ entities:
     type: boolean
     optional: true
 - entity: switch
-  name: Temperature Alarm Settings
+  name: Temperature Alarm
   category: config
   dps:
   - id: 237
@@ -211,7 +211,7 @@ entities:
     optional: true
     persist: false
 - entity: select
-  name: Motion Sensitivity Code
+  name: Motion Sensitivity
   category: config
   dps:
   - id: 106
@@ -226,7 +226,7 @@ entities:
     - dps_val: '2'
       value: High
 - entity: select
-  name: Sound Sensitivity Code
+  name: Sound Sensitivity
   category: config
   dps:
   - id: 140
@@ -239,7 +239,7 @@ entities:
     - dps_val: '1'
       value: High
 - entity: select
-  name: Infrared Night Vision Code
+  name: Night Vision
   category: config
   dps:
   - id: 108
@@ -254,7 +254,7 @@ entities:
     - dps_val: '2'
       value: 'On'
 - entity: select
-  name: Recording Mode Code
+  name: Recording Mode
   category: config
   dps:
   - id: 151
@@ -284,7 +284,7 @@ entities:
     - dps_val: flip_rotate_180
       value: Rotate 180
 - entity: select
-  name: Anti Flicker Code
+  name: Anti Flicker
   category: config
   hidden: true
   dps:
@@ -300,7 +300,7 @@ entities:
     - dps_val: '2'
       value: 60Hz
 - entity: select
-  name: Lullaby Mode Code
+  name: Lullaby Mode
   category: config
   dps:
   - id: 232
@@ -313,7 +313,7 @@ entities:
     - dps_val: '1'
       value: '1'
 - entity: select
-  name: Lullaby Playback Code
+  name: Lullaby Playback
   category: config
   dps:
   - id: 234
@@ -326,7 +326,7 @@ entities:
     - dps_val: '1'
       value: '1'
 - entity: select
-  name: Lullaby Track Code
+  name: Lullaby Track
   category: config
   dps:
   - id: 235
@@ -351,7 +351,7 @@ entities:
     - dps_val: '7'
       value: Track 8
 - entity: select
-  name: Temperature Unit Code
+  name: Temperature Unit
   category: config
   dps:
   - id: 240
