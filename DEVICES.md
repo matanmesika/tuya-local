@@ -1204,6 +1204,7 @@ streams. Some cameras that provide local feeds may be able to be
 configured using RTSP or ONVIF feeds if they have static IP address,
 port and password.
 
+- Baby monitor camera with temperature and humidity sensors
 - BCom Majic IPBox intercom camera
 - Camnsmart E27-TY camera
 - Door peephole camera
@@ -1357,6 +1358,7 @@ port and password.
 - Inkbird IIC400 irrigation controller
 - Joekol dual pump watering system
 - KRain KRX8 (also KRX6) irrigation controller
+- ME220FW smart water valve
 - Neo Coolcam 16 zone sprinkler controller
 - Neo NAS-WV02W water use monitoring valve
 - Neptun Smart and Smart+ water leak control systems
