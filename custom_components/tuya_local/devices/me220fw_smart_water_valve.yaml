@@ -1,0 +1,295 @@
+name: Water valve
+products:
+  - id: 6w5zwkrivvjgqizb
+    model: ME220FW
+entities:
+  - entity: valve
+    class: water
+    dps:
+      - id: 102
+        type: boolean
+        name: valve
+      - id: 115
+        type: string
+        optional: true
+        name: firmware_version
+  - entity: number
+    name: Valve target position
+    icon: "mdi:valve"
+    dps:
+      - id: 2
+        type: integer
+        name: value
+        unit: "%"
+        range:
+          min: 0
+          max: 100
+        mapping:
+          - step: 10
+  - entity: sensor
+    name: Actual valve position
+    category: diagnostic
+    icon: "mdi:valve"
+    dps:
+      - id: 3
+        type: integer
+        name: sensor
+        unit: "%"
+        class: measurement
+        range:
+          min: 0
+          max: 100
+  - entity: sensor
+    name: Per-use water consumption
+    class: water
+    dps:
+      - id: 5
+        type: integer
+        name: sensor
+        unit: L
+        class: total_increasing
+        mapping:
+          - scale: 100
+  - entity: sensor
+    name: Daily water usage
+    class: water
+    dps:
+      - id: 6
+        type: integer
+        name: sensor
+        unit: L
+        class: total_increasing
+        mapping:
+          - scale: 100
+  - entity: sensor
+    class: battery
+    category: diagnostic
+    dps:
+      - id: 7
+        type: integer
+        optional: true
+        force: true
+        name: sensor
+        unit: "%"
+        class: measurement
+        mapping:
+          - scale: 10
+  - entity: select
+    name: Smart weather
+    category: config
+    icon: "mdi:weather-partly-cloudy"
+    dps:
+      - id: 13
+        type: string
+        optional: true
+        name: option
+        mapping:
+          - dps_val: sunny
+            value: Sunny
+          - dps_val: clear
+            value: Clear
+          - dps_val: cloud
+            value: Cloud
+          - dps_val: cloudy
+            value: Cloudy
+          - dps_val: rainy
+            value: Rainy
+          - dps_val: snow
+            value: Snow
+          - dps_val: fog
+            value: Fog
+  - entity: number
+    name: Irrigation countdown
+    class: duration
+    category: config
+    dps:
+      - id: 114
+        type: integer
+        optional: true
+        name: value
+        unit: s
+        range:
+          min: 0
+          max: 86400
+  - entity: sensor
+    name: Water temperature
+    class: temperature
+    dps:
+      - id: 116
+        type: integer
+        name: sensor
+        unit: C
+        class: measurement
+  - entity: sensor
+    name: Air temperature
+    class: temperature
+    dps:
+      - id: 112
+        type: integer
+        optional: true
+        name: sensor
+        unit: C
+        class: measurement
+  - entity: binary_sensor
+    name: Daily usage alarm
+    class: problem
+    dps:
+      - id: 101
+        type: string
+        optional: true
+        name: sensor
+        mapping:
+          - dps_val: High
+            value: true
+          - value: false
+  - entity: binary_sensor
+    name: Single use alarm
+    class: problem
+    dps:
+      - id: 113
+        type: string
+        optional: true
+        name: sensor
+        mapping:
+          - dps_val: High
+            value: true
+          - value: false
+  - entity: number
+    name: Single use limit
+    category: config
+    icon: "mdi:water-alert"
+    dps:
+      - id: 104
+        type: integer
+        optional: true
+        name: value
+        unit: L
+        range:
+          min: 0
+          max: 99999
+  - entity: number
+    name: Daily limit
+    category: config
+    icon: "mdi:water-alert"
+    dps:
+      - id: 105
+        type: integer
+        optional: true
+        name: value
+        unit: L
+        range:
+          min: 0
+          max: 99999
+  - entity: switch
+    name: Close on single use limit
+    category: config
+    icon: "mdi:valve-closed"
+    dps:
+      - id: 106
+        type: boolean
+        optional: true
+        name: switch
+  - entity: switch
+    name: Close on daily limit
+    category: config
+    icon: "mdi:valve-closed"
+    dps:
+      - id: 107
+        type: boolean
+        optional: true
+        name: switch
+  - entity: select
+    translation_key: initial_state
+    category: config
+    dps:
+      - id: 103
+        type: string
+        optional: true
+        name: option
+        mapping:
+          - dps_val: "OFF"
+            value: "off"
+          - dps_val: "ON"
+            value: "on"
+          - dps_val: Last_Status
+            value: memory
+  - entity: sensor
+    name: Water temperature alarm
+    class: enum
+    category: diagnostic
+    icon: "mdi:thermometer-alert"
+    dps:
+      - id: 108
+        type: string
+        optional: true
+        name: sensor
+        mapping:
+          - dps_val: Normal
+            value: Normal
+          - dps_val: Temp_Low
+            value: Low
+          - dps_val: Temp_High
+            value: High
+  - entity: number
+    name: Water temperature high alarm
+    class: temperature
+    category: config
+    dps:
+      - id: 109
+        type: integer
+        optional: true
+        name: value
+        unit: C
+        range:
+          min: 0
+          max: 248
+  - entity: number
+    name: Water temperature low alarm
+    class: temperature
+    category: config
+    dps:
+      - id: 110
+        type: integer
+        optional: true
+        name: value
+        unit: C
+        range:
+          min: 0
+          max: 248
+  - entity: switch
+    name: Anti-rust
+    category: config
+    icon: "mdi:shield-refresh"
+    dps:
+      - id: 111
+        type: boolean
+        optional: true
+        name: switch
+  - entity: button
+    name: Self check
+    category: config
+    icon: "mdi:check-circle-outline"
+    dps:
+      - id: 118
+        type: boolean
+        optional: true
+        name: button
+  - entity: sensor
+    name: Self check status
+    class: enum
+    category: diagnostic
+    icon: "mdi:check-circle-outline"
+    dps:
+      - id: 119
+        type: string
+        optional: true
+        name: sensor
+        mapping:
+          - dps_val: nocheck
+            value: Not checked
+          - dps_val: check_ok
+            value: OK
+          - dps_val: check_err
+            value: Error
+          - dps_val: checking
+            value: Checking
